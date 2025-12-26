@@ -10,10 +10,10 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 
-def get_search_tool(thema):
+def get_search_tool():
     tool = TavilySearch(
-        max_results=5,
-        topic="general",
+        max_results=3,
+        #topic="general",
         # include_answer=False,
         # include_raw_content=False,
         # include_images=False,
@@ -24,10 +24,9 @@ def get_search_tool(thema):
         # exclude_domains=None
     )
 
-    result = tool.invoke({"query": thema})
-
-    print(result)
+    return tool
 
 if __name__ == "__main__":
-    thema = input("あなたが作りたい資料のテーマを入力してください: ")
-    get_search_tool(thema)
+    tool = get_search_tool()
+    print(tool.run("What is Tavily???"))
+    
